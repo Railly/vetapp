@@ -1,30 +1,40 @@
 
 <?php
-function renderLoginForm()
+function renderLoginForm($role)
 {
+  $path = array('Patient' => 'login.php', 'Vet' => 'vet/login.php');
   return <<<HTML
-      <form class="px-4 mx-4 my-6 py-6 bg-white shadow-md rounded-lg" method="POST" action="/vetapp/login.php">
+    <div class="flex justify-center w-full">
+      <form class="w-1/3 px-4 py-6 mx-4 my-6 bg-white rounded-lg shadow-md" method="POST" action="/vetapp/$path[$role]">
+        <h1 id="login-text" class="mb-4 text-2xl font-bold text-center text-gray-700"></h1>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+          <label class="block mb-2 text-sm font-bold text-gray-700" for="email">
             Email
           </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Email" name="email">
+          <input class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Email" name="email">
         </div>
         <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+          <label class="block mb-2 text-sm font-bold text-gray-700" for="password">
             Password
           </label>
 
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="************" name="password">
+          <input class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="************" name="password">
         </div>
         <div class="flex items-center justify-between">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+          <button class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="submit">
             Sign In
           </button>
-          <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/vetapp/signup.php">
+          <a class="inline-block text-sm font-bold text-blue-500 align-baseline hover:text-blue-800" href="/vetapp/signup.php">
             Don't have an account?
           </a>
         </div>
       </form>
+      </div>
+      <script>
+        document.getElementById('username').focus();
+        document.getElementById('login-text').innerHTML = '$role Login';
+        // add classname
+        document.getElementById('login-text').className = 'text-rose-400 font-bold text-center text-xl';
+      </script>
 HTML;
 }

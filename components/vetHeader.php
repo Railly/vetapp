@@ -1,5 +1,5 @@
 <?php
-function renderAppHeader()
+function renderVetHeader()
 {
   return <<<HTML
 <!DOCTYPE html>
@@ -36,29 +36,7 @@ function renderAppHeader()
     <h1 class="text-2xl font-bold text-white">
       Vet App
     </h1>
-      <div class="grid grid-cols-4 gap-5 place-items-center">
-        <a href="/vetapp/app/new/pet.php">
-          <button class="px-4 py-2 font-bold text-white transition bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="submit">
-            Register a new pet
-          </button>
-        </a>
-        <a href="/vetapp/app/index.php">
-          <button class="px-4 py-2 font-bold text-white transition rounded bg-amber-500 hover:bg-amber-700 focus:outline-none focus:shadow-outline" type="submit">
-            View your pets
-          </button>
-        </a>
-        <a href="/vetapp/app/new/consultation.php">
-          <button class="px-4 py-2 font-bold text-white transition rounded bg-sky-500 hover:bg-sky-700 focus:outline-none focus:shadow-outline" type="submit">
-            Register a new consultation
-          </button>
-        </a>
-        <a href="/vetapp/app/consultations.php">
-          <button class="px-4 py-2 font-bold text-white transition bg-green-500 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline" type="submit">
-            View your consultations
-          </button>
-        </a>
-    </div>
-    <a class="flex" href="/vetapp/app/logout.php">
+    <a href="/vetapp/app/logout.php">
       <button class="px-4 py-2 font-bold text-white transition bg-red-500 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline" type="submit">
         Logout
       </button>
