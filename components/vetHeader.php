@@ -36,6 +36,11 @@ function renderVetHeader()
     <h1 class="text-2xl font-bold text-white">
       Vet App
     </h1>
+    <a href="/vetapp/vet/index.php">
+      <button class="px-4 py-2 font-bold text-white transition bg-green-500 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline" type="submit">
+        View your consultations
+      </button>
+    </a>
     <a href="/vetapp/app/logout.php">
       <button class="px-4 py-2 font-bold text-white transition bg-red-500 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline" type="submit">
         Logout

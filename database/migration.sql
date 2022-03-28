@@ -24,7 +24,14 @@ INSERT INTO mydb.pet (name, id_patient, id_species, age, weight) VALUES ('Mia', 
 INSERT INTO mydb.vet (name, email, password) VALUES ('Dr. Smith', 'smith@gmail.com', '$2y$10$aaFnmJokhf8eKe/4JiAbROdTFqgapY6zYupB5EY18tXr4l0Un3gsi');
 INSERT INTO mydb.vet (name, email, password) VALUES ('Dr. Jones', 'jones@gmail.com', '$2y$10$aaFnmJokhf8eKe/4JiAbROdTFqgapY6zYupB5EY18tXr4l0Un3gsi');
 
-INSERT INTO mydb.consultation (date, image, blood_test, cost, medicines, id_vet, id_pet, id_patient) VALUES ('2020-01-01', 'image1.jpg', '10', '10', 'medicines', 1, 1, 1);
-INSERT INTO mydb.consultation (date, image, blood_test, cost, medicines, id_vet, id_pet, id_patient) VALUES ('2020-01-02', 'image2.jpg', '20', '20', 'medicines', 1, 2, 1);
-INSERT INTO mydb.consultation (date, image, blood_test, cost, medicines, id_vet, id_pet, id_patient) VALUES ('2020-01-03', 'image3.jpg', '30', '30', 'medicines', 1, 6, 1);
-INSERT INTO mydb.consultation (date, image, blood_test, cost, medicines, id_vet, id_pet, id_patient) VALUES ('2020-01-04', 'image4.jpg', '40', '40', 'medicines', 1, 6, 1);
+INSERT INTO mydb.consultation (date, image, status, medicines, blood_test, cost, id_vet, id_pet, id_patient) VALUES ('2020-01-01','x-raydog.jpg', 'attended', "Ibuprofeno, Parcetamol, Cetirizina", 10, 30, 1, 1, 1);
+INSERT INTO mydb.consultation (date, image, status, medicines, blood_test, cost, id_vet, id_pet, id_patient) VALUES ('2020-01-02','x-raycat.jpg', 'attended', "Ibuprofeno, Parcetamol, Cetirizina", 10, 50, 1, 2, 1);
+INSERT INTO mydb.consultation (date, image, status, medicines, blood_test, cost, id_vet, id_pet, id_patient) VALUES ('2020-01-03','x-raycat2.jpg', 'attended', "Ibuprofeno, Parcetamol, Cetirizina", 10, 70, 1, 2, 1);
+INSERT INTO mydb.consultation (date, id_vet, id_pet, id_patient) VALUES ('2020-01-02', 1, 2, 1);
+INSERT INTO mydb.consultation (date, id_vet, id_pet, id_patient) VALUES ('2020-01-03', 1, 6, 1);
+INSERT INTO mydb.consultation (date, id_vet, id_pet, id_patient) VALUES ('2020-01-04', 1, 6, 1);
+
+
+INSERT INTO mydb.debt (id_consultation, id_pet, amount, status) VALUES (1, 1, 30, 'paid');  
+INSERT INTO mydb.debt (id_consultation, id_pet, amount, status) VALUES (2, 2, 50, 'paid');
+INSERT INTO mydb.debt (id_consultation, id_pet, amount) VALUES (3, 2, 70);

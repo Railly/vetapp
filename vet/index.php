@@ -23,20 +23,39 @@ if (isset($_SESSION['id_vet'])) {
           $id_consultation = $consultation['id_consultation'];
           $query_3 = ("SELECT id_pet, name, id_species, age, weight FROM pet WHERE id_pet = (SELECT id_pet FROM consultation WHERE id_consultation = '$id_consultation')");
           $query_4 = ("SELECT id_patient, name FROM patient WHERE id_patient = (SELECT id_patient FROM consultation WHERE id_consultation = '$id_consultation')");
+          $query_5 = ("SELECT id_debt, status FROM debt WHERE id_consultation = '$id_consultation'");
           $result_3 = mysqli_query($conn, $query_3);
           $result_4 = mysqli_query($conn, $query_4);
+          $result_5 = mysqli_query($conn, $query_5);
           $pet = mysqli_fetch_assoc($result_3);
           $patient = mysqli_fetch_assoc($result_4);
+          $debt = mysqli_fetch_assoc($result_5);
           $consultation['pet'] = $pet;
           $consultation['patient'] = $patient;
+          $consultation['debt'] = $debt;
+          $consultations_array[] = $consultation;
         }
       }
     }
   } else {
-    header("Location: /vetapp/vet/index.php");
+    header("Location: /vetapp/vet/login.php");
   }
 } else {
-  header("Location: /vetapp/login.php");
+  header("Location: /vetapp/vet/login.php");
+}
+
+
+if (isset($_GET['id'])) {
+  $id_consultation = $_GET['id'];
+  $query_6 = ("UPDATE debt SET status = 'paid' WHERE id_consultation = '$id_consultation'");
+  $result_5 = mysqli_query($conn, $query_6);
+  if (!$result_5) {
+    $_SESSION['message'] = 'Sorry, there was an error' . mysqli_error($conn);
+    $_SESSION['message_type'] = 'danger';
+  } else {
+    $_SESSION['message'] = 'Payment was checked';
+    $_SESSION['message_type'] = 'success';
+  }
 }
 ?>
 
@@ -50,9 +69,9 @@ if (isset($_SESSION['id_vet'])) {
   <div class="flex justify-center w-full">
     <div class="flex flex-col w-2/3 bg-gray-200 rounded-lg shadow-lg">
       <?php
-      if ($consultations) {
+      if ($consultations_array) {
         echo renderVetConsultationHeader();
-        foreach ($consultations as $consultation) {
+        foreach ($consultations_array as $consultation) {
           echo renderVetConsultationRow($consultation);
         }
       } else {

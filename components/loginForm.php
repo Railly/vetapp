@@ -2,7 +2,7 @@
 <?php
 function renderLoginForm($role)
 {
-  $path = array('Patient' => 'login.php', 'Vet' => 'vet/login.php');
+  $path = array('Owner' => 'login.php', 'Vet' => 'vet/login.php');
   return <<<HTML
     <div class="flex justify-center w-full">
       <form class="w-1/3 px-4 py-6 mx-4 my-6 bg-white rounded-lg shadow-md" method="POST" action="/vetapp/$path[$role]">
@@ -26,6 +26,9 @@ function renderLoginForm($role)
           </button>
           <a class="inline-block text-sm font-bold text-blue-500 align-baseline hover:text-blue-800" href="/vetapp/signup.php">
             Don't have an account?
+          </a>
+          <a class="inline-block text-sm font-bold text-blue-500 align-baseline hover:text-blue-800" href="/vetapp/vet/login.php">
+            Are you a vet?
           </a>
         </div>
       </form>

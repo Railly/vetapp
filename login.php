@@ -30,7 +30,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
 ?>
 
 <?php echo renderHeader() ?>
-<?php echo renderLoginForm('Patient') ?>
+<?php echo renderLoginForm('Owner') ?>
 <?php if (isset($_SESSION['message'])) {
   echo renderToast($_SESSION['message'], $_SESSION['message_type']);
   unset($_SESSION['message']);

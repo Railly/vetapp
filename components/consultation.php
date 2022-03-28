@@ -3,47 +3,58 @@
 function renderConsultationHeader()
 {
   return <<<HTML
-    <div class="grid grid-cols-7 bg-slate-800 pt-4 rounded-t-lg mb-4" >
-      <h3 class="text-center text-xl text-white mb-4">Vet</h3>
-      <h3 class="text-center text-xl text-gray-100 mb-6">Date</h3>
-      <h3 class="text-center text-xl text-gray-100 mb-6">Pet</h3>
-      <h3 class="text-center text-xl text-gray-100 mb-6">X-Ray</h3>
-      <h3 class="text-center text-xl text-gray-100 mb-6">Blood test</h3>
-      <h3 class="text-center text-xl text-gray-100 mb-6">Medicines</h3>
-      <h3 class="text-center text-xl text-gray-100 mb-6">Cost</h3>
+    <div class="grid grid-cols-7 pt-4 mb-4 rounded-t-lg bg-slate-800" >
+      <h3 class="mb-4 text-xl text-center text-white">Vet</h3>
+      <h3 class="mb-6 text-xl text-center text-gray-100">Date</h3>
+      <h3 class="mb-6 text-xl text-center text-gray-100">Pet</h3>
+      <h3 class="mb-6 text-xl text-center text-gray-100">X-Ray</h3>
+      <h3 class="mb-6 text-xl text-center text-gray-100">Blood test</h3>
+      <h3 class="mb-6 text-xl text-center text-gray-100">Medicines</h3>
+      <h3 class="mb-6 text-xl text-center text-gray-100">Cost</h3>
 </div>
 HTML;
 }
 
 function renderConsultationRow($consultation, $pet, $vet)
 {
+  $id_consultation = $consultation['id_consultation'];
+  $medicines = json_encode(array_map(function ($medicine) {
+    // split by ", "
+    return explode(", ", $medicine);
+  }, array('item' => $consultation['medicines'])));
+  if (!$consultation['image']) {
+    $consultation['image'] = "https://via.placeholder.com/120x100?text=no+x-ray-image";
+  } else {
+    $consultation['image'] = '../uploads/' . $consultation['image'];
+  }
+
+  if (!$consultation['blood_test']) {
+    $consultation['blood_test'] = "-";
+  }
+
+  $consultation['cost'] = $consultation['cost'] ? 'S/. ' . $consultation['cost'] : '-';
   return <<<HTML
-    <div class="grid grid-cols-7" >
-      <h3 class="text-center text-xl text-gray-800 mb-6">$vet[name]</h3>
-      <h3 class="text-center text-xl text-gray-800 mb-6">$consultation[date]</h3>
-      <h3 class="text-center text-xl text-gray-800 mb-6">$pet[name]</h3>
-      <h3 class="text-center text-xl text-gray-800 mb-6">
-        <!-- See consultas -->
-        <a class="text-blue-500 hover:text-blue-700" href="/vetapp/app/xray.php?id_consultation=$consultation[id_consultation]">
-          Ver
-            <i class="fas fa-search"></i>
-        </a>
-      </h3>
-      <h3 class="text-center text-xl text-gray-800 mb-6">
-        <!-- See consultas -->
-        <a class="text-blue-500 hover:text-blue-700" href="/vetapp/app/bloodtest.php?id_consultation=$consultation[id_consultation]">
-          Ver
-            <i class="fas fa-search"></i>
-        </a>
-      </h3>
-      <h3 class="text-center text-xl text-gray-800 mb-6">
-        <!-- See consultas -->
-        <a class="text-blue-500 hover:text-blue-700" href="/vetapp/app/medicines.php?id_consultation=$consultation[id_consultation]">
-          Ver
-            <i class="fas fa-search"></i>
-        </a>
-      </h3>
-      <h3 class="text-center text-xl text-gray-800 mb-6">$consultation[cost]</h3>
+    <div class="grid grid-cols-7 gap-10 place-items-center" >
+      <h3 class="mb-6 text-xl text-center text-gray-800">$vet[name]</h3>
+      <h3 class="mb-6 text-xl text-center text-gray-800">$consultation[date]</h3>
+      <h3 class="mb-6 text-xl text-center text-gray-800">$pet[name]</h3>
+      <img src="$consultation[image]" alt="X-Ray" class="w-full m-2">
+      <h3 class="mb-6 text-xl text-center text-gray-800">$consultation[blood_test]</h3>
+      <ul id="$id_consultation" class="mb-6 text-xl text-center text-gray-800">
+      </ul>
+      <h3 class="mb-6 text-xl text-center text-gray-800">$consultation[cost]</h3>
 </div>
+<script>
+  var medicines = $medicines;
+  console.log(medicines);
+  var id_consultation = "$id_consultation";
+  var ul = document.getElementById(id_consultation);
+  medicines.item.forEach(function(medicine) {
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(medicine));
+    li.classList.add("list-disc");
+    ul.appendChild(li);
+  });
+  </script>
 HTML;
 }

@@ -22,9 +22,14 @@ if (isset($_SESSION['id_patient'])) {
       if ($pets) {
         foreach ($pets as $pet) {
           $query_4 = ("SELECT name FROM species WHERE id_species ='$pet[id_species]'");
+          $query_5 = ("SELECT SUM(amount) AS total FROM debt WHERE (status = 'no paid') AND id_pet = '$pet[id_pet]'");
           $result_4 = mysqli_query($conn, $query_4);
+          $result_5 = mysqli_query($conn, $query_5);
           $species = mysqli_fetch_assoc($result_4);
+          $debt = mysqli_fetch_assoc($result_5);
+          echo mysqli_error($conn);
           $pet['species'] = $species['name'];
+          $pet['debt'] = $debt['total'];
           $pets_array[] = $pet;
         }
       }
@@ -41,10 +46,10 @@ if (isset($_SESSION['id_patient'])) {
 <?php echo renderAppHeader() ?>
 
 
-<div class="px-4 my-6 py-6 w-full flex justify-center flex-col">
-  <h1 class="text-center text-3xl text-gray-800 mb-6">Welcome <?php echo $user['name'] ?></h1>
-  <h2 class="font-bold text-2xl text-center mb-4">My pets</h2>
-  <div class="w-full flex justify-center">
+<div class="flex flex-col justify-center w-full px-4 py-6 my-6">
+  <h1 class="mb-6 text-3xl text-center text-gray-800">Welcome <?php echo $user['name'] ?></h1>
+  <h2 class="mb-4 text-2xl font-bold text-center">My pets</h2>
+  <div class="flex justify-center w-full">
     <div class="flex flex-col w-2/3 bg-gray-200 rounded-lg shadow-lg">
       <?php
       if ($pets) {
@@ -54,7 +59,7 @@ if (isset($_SESSION['id_patient'])) {
         }
       } else {
         echo '<div class="w-1/2 p-4">';
-        echo '<h3 class="text-center text-xl text-gray-800 mb-6">You have no pets &#128546;</h3>';
+        echo '<h3 class="mb-6 text-xl text-center text-gray-800">You have no pets &#128546;</h3>';
         echo '</div>';
       }
       ?>
