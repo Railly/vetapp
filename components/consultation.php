@@ -3,13 +3,14 @@
 function renderConsultationHeader()
 {
   return <<<HTML
-    <div class="grid grid-cols-7 pt-4 mb-4 rounded-t-lg bg-slate-800" >
+    <div class="grid grid-cols-8 pt-4 mb-4 rounded-t-lg bg-slate-800" >
       <h3 class="mb-4 text-xl text-center text-white">Vet</h3>
       <h3 class="mb-6 text-xl text-center text-gray-100">Date</h3>
       <h3 class="mb-6 text-xl text-center text-gray-100">Pet</h3>
       <h3 class="mb-6 text-xl text-center text-gray-100">X-Ray</h3>
       <h3 class="mb-6 text-xl text-center text-gray-100">Blood test</h3>
       <h3 class="mb-6 text-xl text-center text-gray-100">Medicines</h3>
+      <h3 class="mb-6 text-xl text-center text-gray-100">Diagnosis</h3>
       <h3 class="mb-6 text-xl text-center text-gray-100">Cost</h3>
 </div>
 HTML;
@@ -32,9 +33,13 @@ function renderConsultationRow($consultation, $pet, $vet)
     $consultation['blood_test'] = "-";
   }
 
+  if (!$consultation['diagnosis']) {
+    $consultation['diagnosis'] = "-";
+  }
+
   $consultation['cost'] = $consultation['cost'] ? 'S/. ' . $consultation['cost'] : '-';
   return <<<HTML
-    <div class="grid grid-cols-7 gap-10 place-items-center" >
+    <div class="grid grid-cols-8 gap-10 place-items-center" >
       <h3 class="mb-6 text-xl text-center text-gray-800">$vet[name]</h3>
       <h3 class="mb-6 text-xl text-center text-gray-800">$consultation[date]</h3>
       <h3 class="mb-6 text-xl text-center text-gray-800">$pet[name]</h3>
@@ -42,6 +47,7 @@ function renderConsultationRow($consultation, $pet, $vet)
       <h3 class="mb-6 text-xl text-center text-gray-800">$consultation[blood_test]</h3>
       <ul id="$id_consultation" class="mb-6 text-xl text-center text-gray-800">
       </ul>
+      <h3 class="mb-6 text-xl text-center text-gray-800">$consultation[diagnosis]</h3>
       <h3 class="mb-6 text-xl text-center text-gray-800">$consultation[cost]</h3>
 </div>
 <script>

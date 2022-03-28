@@ -8,9 +8,9 @@ if (isset($_SESSION['id_patient'])) {
   $id_patient = $_SESSION['id_patient'];
   if ($id_patient) {
     $query_1 = ("SELECT id_patient, name, password FROM patient WHERE id_patient ='$id_patient'");
-    $query_2 = ("SELECT id_consultation, date, cost, blood_test, image, medicines, id_pet, id_vet FROM consultation WHERE id_patient ='$id_patient'");
+    $query_2 = ("SELECT id_consultation, date, cost, blood_test, image, medicines, diagnosis, id_pet, id_vet FROM consultation WHERE id_patient ='$id_patient'");
     if (isset($_GET['id_pet'])) {
-      $query_3 = ("SELECT id_consultation, date, cost, blood_test, image, medicines, id_pet, id_vet FROM consultation WHERE id_patient ='$id_patient' AND id_pet = '$_GET[id_pet]'");
+      $query_3 = ("SELECT id_consultation, date, cost, blood_test, image, medicines,diagnosis, id_pet, id_vet FROM consultation WHERE id_patient ='$id_patient' AND id_pet = '$_GET[id_pet]'");
       $result_3 = mysqli_query($conn, $query_3);
     }
     $result_1 = mysqli_query($conn, $query_1);
