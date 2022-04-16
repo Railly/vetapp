@@ -31,12 +31,16 @@ if (isset($_SESSION['id_patient'])) {
         foreach ($consultations as $consultation) {
           $query_3 = ("SELECT id_vet, name FROM vet WHERE id_vet ='$consultation[id_vet]'");
           $query_4 = ("SELECT id_pet, name FROM pet WHERE id_pet ='$consultation[id_pet]'");
+          $query_5 = ("SELECT id_debt, status FROM debt WHERE id_consultation ='$consultation[id_consultation]'");
           $result_3 = mysqli_query($conn, $query_3);
           $result_4 = mysqli_query($conn, $query_4);
+          $result_5 = mysqli_query($conn, $query_5);
           $vet = mysqli_fetch_assoc($result_3);
           $pet = mysqli_fetch_assoc($result_4);
+          $debt = mysqli_fetch_assoc($result_5);
           $consultation['vet'] = $vet;
           $consultation['pet'] = $pet;
+          $consultation['debt'] = $debt;
           $consultations_array[] = $consultation;
         }
         // echo $consultations_array = json_encode($consultations_array);
