@@ -20,8 +20,8 @@ HTML;
 function renderConsultationRow($consultation, $pet, $vet)
 {
   $id_consultation = $consultation['id_consultation'];
-  $debt = $consultation['debt']['status'] == 'paid' ? 'Paid' : 'Pending';
-  $debtStyle = $consultation['debt']['status'] == 'paid' ? 'bg-green-500' : 'bg-red-500';
+  $debt = $consultation['debt'] && $consultation['debt']['status'] == 'paid' ? 'Paid' : 'Pending';
+  $debtStyle = $consultation['debt'] && $consultation['debt']['status'] == 'paid' ? 'bg-green-500' : 'bg-red-500';
   $medicines = json_encode(array_map(function ($medicine) {
     // split by ", "
     return explode(", ", $medicine);
