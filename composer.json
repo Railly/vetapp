@@ -1,13 +1,15 @@
 {
-  "name": "Railly/vetapp",
-  "description": "Sample PHP application for App Platform",
-  "type": "project",
-  "require": {
-    "alrik11es/cowsayphp": "^1.2"
-  },
-  "authors": [
-    {
-      "name": "Railly Hugo"
-    }
-  ]
+    "name": "raill/vetapp",
+    "autoload": {
+        "psr-4": {
+            "Raill\\Vetapp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Railly",
+            "email": "railly_2009@hotmail.com"
+        }
+    ],
+    "require": {}
 }
