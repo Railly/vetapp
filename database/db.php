@@ -20,5 +20,3 @@ mysqli_real_connect(
   'AVNS_1De2LETJbDck61D',
   'defaultdb'
 ) or die(mysqli_error($mysqli));
-
-mysqli_set_charset($conn, "utf8mb3");
