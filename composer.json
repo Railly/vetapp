@@ -1,15 +1,18 @@
 {
-    "name": "raill/vetapp",
-    "autoload": {
-        "psr-4": {
-            "Raill\\Vetapp\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Railly",
-            "email": "railly_2009@hotmail.com"
-        }
-    ],
-    "require": {}
+  "name": "raill/vetapp",
+  "autoload": {
+    "psr-4": {
+      "Raill\\Vetapp\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Railly",
+      "email": "railly_2009@hotmail.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "dev-master"
+  }
 }
